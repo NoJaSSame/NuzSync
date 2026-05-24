@@ -1,0 +1,66 @@
+{
+  "name": "nuzsync",
+  "private": true,
+  "version": "1.5.0",
+  "main": "app/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && cross-env NODE_ENV=development node app/launch.cjs\"",
+    "electron:build": "vite build && cross-env ELECTRON_RUN_AS_NODE= electron-builder",
+    "electron:publish": "vite build && cross-env ELECTRON_RUN_AS_NODE= electron-builder --publish always"
+  },
+  "build": {
+    "appId": "com.nuzsync.app",
+    "productName": "NuzSync",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "app/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../Nuzelock Tracker/csharp/bin/Release/net9.0-windows/win-x64/publish/NuzelockReader.exe",
+        "to": "nuzelock-reader/NuzelockReader.exe"
+      },
+      {
+        "from": "build/icon.ico",
+        "to": "tray-icon.ico"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "NoJaSSame",
+      "repo": "NuzSync",
+      "releaseType": "release"
+    }
+  },
+  "dependencies": {
+    "@pkmn/sim": "^0.10.9",
+    "electron-updater": "^6.8.3",
+    "firebase": "^12.13.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^33.4.11",
+    "electron-builder": "^26.8.1",
+    "vite": "^5.4.2",
+    "wait-on": "^9.0.10"
+  }
+}

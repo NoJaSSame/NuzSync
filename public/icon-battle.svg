@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Épée gauche -->
+  <line x1="3" y1="21" x2="14" y2="10"/>
+  <path d="M14 10 L17 7 L19 5 L19 3 L17 3 L15 5 L12 8"/>
+  <line x1="3" y1="19" x2="5" y2="21"/>
+  <line x1="5" y1="19" x2="3" y2="21"/>
+  <!-- Épée droite -->
+  <line x1="21" y1="21" x2="10" y2="10"/>
+  <path d="M10 10 L7 7 L5 5 L5 3 L7 3 L9 5 L12 8"/>
+  <line x1="21" y1="19" x2="19" y2="21"/>
+  <line x1="19" y1="19" x2="21" y2="21"/>
+</svg>
