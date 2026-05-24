@@ -629,13 +629,24 @@ function startRyujinxWatcher() {
 
 autoUpdater.autoDownload = false
 
+function stripHtml(html) {
+  return (html || '')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/&quot;/g, '"')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
 autoUpdater.on('update-available', info => {
   mainWindow?.show(); mainWindow?.focus()
+  const notes = stripHtml(info.releaseNotes)
   dialog.showMessageBox(mainWindow, {
     type: 'info', buttons: ['Mettre à jour', 'Plus tard'],
     title: 'Mise à jour disponible',
     message: `Version ${info.version} disponible !`,
-    detail: info.releaseNotes || 'Une nouvelle version est disponible.',
+    detail: notes || 'Une nouvelle version est disponible.',
   }).then(({ response }) => { if (response === 0) autoUpdater.downloadUpdate() })
 })
 
